@@ -2,7 +2,7 @@ import React from "react";
 import Todo from "./components/Todo";
 import { useRef, useState, useEffect } from "react";
 
-export const url = "Backend deployment URL from Heroku"; 
+export const url = "https://get-my-db05105.herokuapp.com/api/v1/";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
@@ -29,21 +29,21 @@ function App() {
     const addUrl = url;
     const contentInput = todoContentRef.current.value;
     const addData = {
-      title:contentInput
+      title: contentInput
     };
     fetch(addUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(addData)
     }).then((response) => {
-        if(!response.ok) {
-          alert('Add failed');
-        } else {
-          return response.json();
-        }
+      if (!response.ok) {
+        alert('Add failed');
+      } else {
+        return response.json();
+      }
     }).then(response => {
-        event.target.reset();
-        getItems();
+      event.target.reset();
+      getItems();
     });
   }
 
@@ -66,7 +66,7 @@ function App() {
         <p>Loading...</p>
       ) : (
         todoList.map((item) => {
-          return <Todo key={item.id} id={item.id} title={item.title} completed={item.completed} getItems={getItems}/>;
+          return <Todo key={item.id} id={item.id} title={item.title} completed={item.completed} getItems={getItems} />;
         })
       )}
     </div>
